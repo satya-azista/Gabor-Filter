@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 from sklearn.cluster import KMeans
 from math import sqrt
+
 #Gabor images Genrated depended on wavelength(Format-array) , oreintation(Format-array) , sigma , gamma , phi values
 def gabor_image_generator(image,sigma,theta,wavelength,gamma,phi,kernel_size):
   stack_image=[]
@@ -39,9 +40,8 @@ def euclid_array_generator(mean_stack,image_stack):
               val += (mean_array[k] - image_stack[i, j, k]) ** 2
           euclid_distances_image[i][j]=sqrt(val)
   return euclid_distances_image
-#applying Kmeans to euclid image
-import numpy as np
 
+#applying Kmeans to euclid image
 def kmeans_light(data, K):
     N, dim = data.shape
     stop_iter = 0.05
