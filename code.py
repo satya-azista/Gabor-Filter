@@ -1,3 +1,5 @@
+#satya sai
+
 import cv2
 import numpy as np
 from sklearn.cluster import KMeans
@@ -16,7 +18,7 @@ def gabor_image_generator(image,sigma,theta,wavelength,gamma,phi,kernel_size):
   return stack_image
 
 #mean array generation of specifeid regions
-  def mean_array_generator(stack_image,cordinates):
+def mean_array_generator(stack_image,cordinates):
     mean_array=[]
     for i in range(len(cordinates)):
         arr=[]
@@ -28,10 +30,10 @@ def gabor_image_generator(image,sigma,theta,wavelength,gamma,phi,kernel_size):
             mean_values=np.mean(flattened_region)
             arr.append(mean_values)
         mean_array.append[arr]
-      return mean_array
+    return mean_array
 
 #Eucliad arrray generation by mean and stacked_images array
-def euclid_array_generator(mean_stack,image_stack):
+def euclid_array_generator(mean_array,image_stack):
     euclid_distances_image= np.zeros((image_stack.shape[0], image_stack.shape[1]))
     for i in range(image_stack.shape[0]):
         for j in range(image_stack.shape[1]):
@@ -91,17 +93,18 @@ if __name__== "__main__":
   phi=0
   theta=np.arange(0,np.pi,np.pi/6)
   r,c=image.shape
-  j=(2**(np.arange((0,np.log2(c/8)+1))-0.5)/c
+  j=(2**(np.arange((0,np.log2(c/8)+1))-0.5))/c
   f=np.concatenate([0.25-j,0.25+j])
   wavlength=1/f
   k_size=3
   stacked_image=gabor_image_generator(image,sigma,theta,wavelength,gamma,phi,k_size)
   coordinates=[[132,13,173,54],[870,601,911,642],[900,1361,941,1402],[1250,129,,1770,1811],[1728,303,1769,344],[2402,2443,1544,1595],[3262,809,3303,850],[3424,3465,1084,1125]]
-  mean_array=mean_array_generate(stacked_image,coordinates)
+  mean_array=mean_array_generator(stacked_image,coordinates)
   euclid_array=euclid_array_generator(mean_array,stacked_image)
   # Assuming 'data' is a numpy array with your input data
   # 'K' is the number of clusters you want to form
-  dataCluster, codebook = kmeans_light(data, K)
+  k=2
+  dataCluster, codebook = kmeans_light(euclid_array, k)
   
   
     
