@@ -1,3 +1,7 @@
+import cv2
+import numpy as np
+from sklearn.cluster import KMeans
+from math import sqrt
 #Gabor images Genrated depended on wavelength(Format-array) , oreintation(Format-array) , sigma , gamma , phi values
 def gabor_image_generator(image,sigma,theta,wavelength,gamma,phi,kernel_size):
   stack_image=[]
@@ -11,19 +15,19 @@ def gabor_image_generator(image,sigma,theta,wavelength,gamma,phi,kernel_size):
   return stack_image
 
 #mean array generation of specifeid regions
-def mean_array_generator(stack_image,cordinates):
-  mean_array=[]
-  for i in range(len(cordinates)):
-      arr=[]
-      for j in range(len(stack_image)):
-          start_col,end_col=cordinates[i][0],cordinates[i][2]
-          start_row,end_row=cordinates[i][1],cordinates[i][3]
-          region = [row[start_col:end_col] for row in stack_image[j][start_row:end_row]]
-          flattened_region = [element for row in region for element in row]
-          mean_values=np.mean(flattened_region)
-          arr.append(mean_values)
-      mean_array.append[arr]
-    return mean_array
+  def mean_array_generator(stack_image,cordinates):
+    mean_array=[]
+    for i in range(len(cordinates)):
+        arr=[]
+        for j in range(len(stack_image)):
+            start_col,end_col=cordinates[i][0],cordinates[i][2]
+            start_row,end_row=cordinates[i][1],cordinates[i][3]
+            region = [row[start_col:end_col] for row in stack_image[j][start_row:end_row]]
+            flattened_region = [element for row in region for element in row]
+            mean_values=np.mean(flattened_region)
+            arr.append(mean_values)
+        mean_array.append[arr]
+      return mean_array
 
 #Eucliad arrray generation by mean and stacked_images array
 def euclid_array_generator(mean_stack,image_stack):
