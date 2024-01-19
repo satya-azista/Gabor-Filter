@@ -33,13 +33,13 @@ def gabor_image_generator(image,sigma,theta,wavelength,gamma,phi,kernel_size):
 #Eucliad arrray generation by mean and stacked_images array
 def euclid_array_generator(mean_stack,image_stack):
     euclid_distances_image= np.zeros((image_stack.shape[0], image_stack.shape[1]))
-  for i in range(image_stack.shape[0]):
-      for j in range(image_stack.shape[1]):
-          val = 0
-          for k in range(image_stack.shape[2]):
-              val += (mean_array[k] - image_stack[i, j, k]) ** 2
-          euclid_distances_image[i][j]=sqrt(val)
-  return euclid_distances_image
+    for i in range(image_stack.shape[0]):
+        for j in range(image_stack.shape[1]):
+            val = 0
+            for k in range(image_stack.shape[2]):
+                val += (mean_array[k] - image_stack[i, j, k]) ** 2
+            euclid_distances_image[i][j]=sqrt(val)
+    return euclid_distances_image
 
 #applying Kmeans to euclid image
 def kmeans_light(data, K):
