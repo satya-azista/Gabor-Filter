@@ -1,4 +1,4 @@
-#satya sai
+#satya sai thota
 
 import cv2
 import numpy as np
@@ -86,7 +86,7 @@ def eucdist2(X, Y):
     return d
   
 if __name__== "__main__":
-  file_path=r""
+  file_path=r"C:\Users\Training\Desktop\delhi2.jpg"
   image=cv2.imread(file_path,cv2.IMREAD_GRAYSCALE)
   sigma=1
   gamma=1
@@ -106,5 +106,6 @@ if __name__== "__main__":
   k=2
   dataCluster, codebook = kmeans_light(euclid_array, k)
   
+
   
     
